@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create payments table
+      author: Taleh Bakhshizada
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: numeric(16,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: month_of_course
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_of_receipt
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cardholder
+                  type: varchar(56)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_of_receipt
+                  type: bytea
+                  constraints:
+                    nullable: true
+              - column:
+                  name: student_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_students_to_payments
+                    references: students(id)
+                    nullable: true
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_courses_to_payments
+                    references: courses(id)
+                    nullable: true
+            remarks: Table to store information about payments

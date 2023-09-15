@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create courses_students table
+      author: Taleh Bakhshizada
+      changes:
+        - createTable:
+            tableName: courses_students
+            columns:
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_course_to_student
+                    references: courses(id)
+                    nullable: false
+              - column:
+                  name: student_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_student_to_course
+                    references: students(id)
+                    nullable: false
+            remarks: Table to store information about relation between course and student

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create payments_students table
+      author: Taleh Bakhshizada
+      changes:
+        - createTable:
+            tableName: payments_students
+            columns:
+              - column:
+                  name: payment_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_payment_to_student
+                    references: payments(id)
+                    nullable: false
+              - column:
+                  name: student_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_student_to_payment
+                    references: students(id)
+                    nullable: false
+            remarks: Table to store information about relation between payment and student
